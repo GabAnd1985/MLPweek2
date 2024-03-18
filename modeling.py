@@ -58,7 +58,7 @@ def generate_pipe():
 
     return continuous_features, logistic_regression, random_forest
 
-def graph_prediction_distribution():
+def graph_prediction_distribution(path_output):
 
     """fot models and graph the prediction
     probabilities using box plot"""
@@ -90,6 +90,7 @@ def graph_prediction_distribution():
               fontsize=16, color='black', fontweight='bold')
     plt.xticks([1, 2], ['Logistic Regression', 'Random Forest'])
     plt.grid(True)
+    plt.savefig(f'{path_output}')
     plt.show()
 
 if __name__ == "__main__":
@@ -99,6 +100,7 @@ if __name__ == "__main__":
     parser.add_argument('input_SI', type=str, help='Path to the SI file')
     parser.add_argument('input_QT', type=str, help='Path to the QT file')
     parser.add_argument('input_LR', type=str, help='Path to the LR file')
+    parser.add_argument('output', type=str, help='Path to the output file')
 
     args = parser.parse_args()
 
@@ -112,4 +114,4 @@ if __name__ == "__main__":
 
     continuous_features_final, logistic_regression_final, random_forest_final= generate_pipe()
 
-    graph_prediction_distribution()
+    graph_prediction_distribution(args.output)
